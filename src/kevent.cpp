@@ -27,6 +27,9 @@ void KernelEv::override_entry() {
 }
 
 void KernelEv::signal() {
+	if( myPCB->Status == BLOCKED )
+		return ;
+
 	myPCB->Status = READY;
 	Scheduler::put(myPCB);
 	dispatch();
